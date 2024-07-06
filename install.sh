@@ -73,7 +73,7 @@ nix-env -iA nixos.alacritty \
 # NIXPKGS_ALLOW_UNFREE=1 nix-env -iA nixos.vscode
 
 # utilities
-nix-env -iA nixos.flameshot \
+NIXPKGS_ALLOW_UNFREE=1 nix-env -iA nixos.flameshot \
   nixos.gnome.cheese \
   nixos.google-chrome \
   nixos.mplayer \

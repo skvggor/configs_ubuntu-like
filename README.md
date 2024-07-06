@@ -4,13 +4,9 @@ This repo contains some of my configuration files for the Linux operating system
 
 ## Installation
 
-### Clone the repository
+### Download the repository (ZIP)
 
-```bash
-git clone git@github.com:skvggor/dotfiles-nixos.git
-```
-
-### Run the installation script
+### Unzip and run the installation script
 
 ```bash
 cd dotfiles-nixos && bash install.sh
@@ -75,7 +71,5 @@ cd dotfiles-nixos && bash install.sh
 ### Others
 
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more.
-
-### Notes
 
 Change as needed.
