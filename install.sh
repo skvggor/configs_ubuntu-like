@@ -111,7 +111,8 @@ cp -rv SimpleScreenRecorder/.ssr ~/
 cp -rv lsd/config.yaml ~/.config/lsd/
 
 # Set fish as default shell
-chsh -s /usr/bin/fish
+sudo echo "$(which fish)" | sudo tee -a /etc/shells
+chsh -s $(which fish)
 
 # Install Node.js packages
 sudo npm i -g \
