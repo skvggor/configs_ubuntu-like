@@ -42,7 +42,8 @@ nix-channel --add https://nixos.org/channels/nixos-24.05 nixos
 nix-channel --update
 
 # design
-nix-env -iA nixos.gimp \
+nix-env -iA nixos.darktable \
+  nixos.gimp \
   nixos.inkscape \
   nixos.krita
 
