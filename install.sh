@@ -1,120 +1,134 @@
 #!/bin/bash
 
-mkdir -v ~/.config/{pulse,lsd,fish,darktable}
+mkdir -v ~/.config/{pulse,lsd,fish,darktable,zellij,alacritty,starship,konsole}
 mkdir ~/Google\ Drive
-mkdir -p ~/Projects/me
+mkdir -p ~/Projects/{personal,work}
 
-# Check if the system is Arch-based and install curl
-if [[ -f /etc/arch-release ]]; then
-  sudo pacman -Syu
-  sudo pacman -S curl \
-    git \
-    docker \
-    docker-compose --noconfirm
+sudo add-apt-repository ppa:obsproject/obs-studio -y
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install -y curl git
 
-  yay -S ttf-ms-win11-auto \
-    visual-studio-code-insiders-bin --noconfirm
-else
-  # Add multiverse repository
-  sudo add-apt-repository multiverse
-
-  sudo apt update
-
-  sudo apt install -y curl \
-    containerd.io \
-    docker-buildx-plugin \
-    docker-ce \
-    docker-ce-cli \
-    docker-compose-plugin \
-    git \
-    ttf-mscorefonts-installer
-fi
-
-# Update font cache
+# UPDATE FONT CACHE
 sudo fc-cache -f -v
 
-# Check if Nix is installed and install it if not
-if ! command -v nix-env &>/dev/null; then
-  sh <(curl -L https://nixos.org/nix/install) --daemon
-fi
+# DESIGN AND MULTIMEDIA
+sudo apt install -y \
+  cheese \
+  darktable \
+  gimp \
+  inkscape \
+  krita \
+  obs-studio \
+  simplescreenrecorder \
+  ttf-mscorefonts-installer \
+  vlc
 
-nix-channel --add https://nixos.org/channels/nixos-24.05 nixos
-nix-channel --update
+# SYSTEM AND DEVELOPMENT
+sudo apt install -y \
+  build-essential \
+  cmake \
+  cmatrix \
+  fish \
+  golang-go \
+  jq \
+  konsole \
+  lsd \
+  micro \
+  net-tools \
+  nodejs
 
-# design
-nix-env -iA nixos.darktable \
-  nixos.gimp \
-  nixos.inkscape \
-  nixos.krita
+# - docker
+sudo apt install -y \
+  apt-transport-https \
+  ca-certificates \
+  gnupg \
+  lsb-release
 
-# system and development
-nix-env -iA nixos.alacritty \
-  nixos.atuin \
-  nixos.bat \
-  nixos.cmake \
-  nixos.cmatrix \
-  nixos.docker \
-  nixos.docker-compose \
-  nixos.fish \
-  nixos.git \
-  nixos.go \
-  nixos.jq \
-  nixos.lsd \
-  nixos.micro \
-  nixos.nettools \
-  nixos.nitch \
-  nixos.nodejs \
-  nixos.rio \
-  nixos.rustup \
-  nixos.starship \
-  nixos.virtualbox \
-  nixos.zellij
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
-# NIXPKGS_ALLOW_UNFREE=1 nix-env -iA nixos.vscode
+sudo apt update -y && sudo apt install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io
 
-# utilities
-NIXPKGS_ALLOW_UNFREE=1 nix-env -iA nixos.flameshot \
-  nixos.gnome.cheese \
-  nixos.google-chrome \
-  nixos.mplayer \
-  nixos.rhythmbox \
-  nixos.solaar \
-  nixos.vlc \
-  nixos.zoxide
-
-# Remove KDE apps shortcuts
-sudo rm -rfv ~/.nix-profile/share/applications/*.kde*
-
-# Create symlinks for desktop shortcuts
-ln -s /home/$USER/.nix-profile/share/applications/* /home/$USER/.local/share/applications/
-ln -s /home/$USER/.nix-profile/share/icons/hicolor/256x256/apps/* /home/$USER/.local/share/icons/hicolor/scalable/apps/
-
-# Install desktop shortcuts
-sudo desktop-file-install ~/.nix-profile/share/applications/*
-sudo update-desktop-database
-
-# Configure and start Dockerq
+# - configure and start
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo chmod 666 /var/run/docker.sock
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
+# // ------------------------------
 
-# Install config files
-cp -rv fish/config.fish ~/.config/fish/
+# - starship
+curl -sS https://starship.rs/install.sh | sh
+# // ------------------------------
+
+# - dbeaver
+sudo wget -O /usr/share/keyrings/dbeaver.gpg.key https://dbeaver.io/debs/dbeaver.gpg.key
+echo "deb [signed-by=/usr/share/keyrings/dbeaver.gpg.key] https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
+sudo apt update -y && sudo apt install dbeaver-ce -y
+# // ------------------------------
+
+# - nitch
+wget https://raw.githubusercontent.com/unxsh/nitch/main/setup.sh && sh setup.sh
+# // ------------------------------
+
+# - rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup default stable
+
+# - cargo packages
+cargo install \
+  alacritty \
+  bat \
+  rioterm \
+  zellij \
+  zoxide
+# // ------------------------------
+
+# - atuin
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+# // ------------------------------
+
+# -- Alacritty config
+git clone https://github.com/alacritty/alacritty ~/temp/alacritty
+cd ~/temp/alacritty
+sudo cp -rv extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+sudo desktop-file-install extra/linux/Alacritty.desktop
+# // ------------------------------
+
+# -- Rio config
+git clone https://github.com/raphamorim/rio ~/temp/rio
+cd ~/temp/rio
+sudo cp -rv misc/logo.svg /usr/share/pixmaps/Rio.svg
+sudo desktop-file-install misc/rio.desktop
+# // ------------------------------
+
+sudo update-desktop-database
+
+# UTILITIES
+sudo apt install -y \
+  flameshot \
+  solaar
+
+# INSTALL CONFIGURATIONS
 cp -rv .gitconfig ~/
-cp -rv alacritty ~/.config/
-cp -rv darktable/styles ~/.config/darktable/styles/
-cp -rv pulse.conf ~/.config/pulse/daemon.conf
-cp -rv SimpleScreenRecorder/.ssr ~/
+cp -rv starship.toml ~/.config/
+cp -rv fish/config.fish ~/.config/fish/
 cp -rv lsd/config.yaml ~/.config/lsd/
+cp -rv pulse.conf ~/.config/pulse/daemon.conf
+cp -rv alacritty ~/.config/
+cp -rv darktable ~/.config/
+cp -rv konsole ~/.local/share/
+cp -rv SimpleScreenRecorder/.ssr ~/
 
-# Set fish as default shell
-sudo echo "$(which fish)" | sudo tee -a /etc/shells
+# SET FISH AS DEFAULT SHELL
 chsh -s $(which fish)
 
-# Install Node.js packages
+# NPM PACKAGES
 sudo npm i -g \
   begynner \
   easy-rename \
@@ -124,12 +138,30 @@ sudo npm i -g \
   svgo \
   vercel
 
-# Install Nerd Fonts
-{
-  mkdir ~/temp && cd ~/temp &&
-    git clone https://github.com/ryanoasis/nerd-fonts &&
-    bash nerd-fonts/install.sh &&
-    cd ~ && rm -rf ~/temp
-} || {
-  echo "Failed to install Nerd Fonts"
-}
+# - set nodejs to LTS
+sudo n lts
+
+# - nerd fonts
+wget "https://github.com/ryanoasis/nerd-fonts/archive/refs/heads/master.zip" -O ~/temp/nerd-fonts.zip
+unzip ~/temp/nerd-fonts.zip
+cd ~/temp/nerd-fonts
+bash install.sh
+# // ------------------------------
+
+# - microsoft edge
+wget "https://go.microsoft.com/fwlink?linkid=2149051" -O ~/temp/edge.deb
+sudo apt install -y ~/temp/edge.deb
+# // ------------------------------
+
+# - google chrome
+wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" -O ~/temp/chrome.deb
+sudo apt install -y ~/temp/chrome.deb
+# // ------------------------------
+
+# - visual studio code insiders
+wget "https://code.visualstudio.com/sha/download?build=insider&os=linux-deb-x64" -O ~/temp/vscode.deb
+sudo apt install -y ~/temp/vscode.deb
+# // ------------------------------
+
+rm -rf ~/temp
+exit 0
