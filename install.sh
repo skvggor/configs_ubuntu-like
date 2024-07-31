@@ -1,8 +1,10 @@
 #!/bin/bash
 
-mkdir -v ~/.config/{pulse,lsd,fish,darktable,zellij,alacritty,starship,konsole}
-mkdir ~/Google\ Drive
-mkdir -p ~/Projects/{personal,work}
+set -euo pipefail
+
+mkdir -pv ~/.config/{pulse,lsd,fish,darktable,zellij,alacritty,starship,konsole}
+mkdir -pv ~/Google\ Drive
+mkdir -pv ~/Projects/{personal,work}
 
 sudo add-apt-repository ppa:obsproject/obs-studio -y
 sudo apt update -y && sudo apt upgrade -y
@@ -52,6 +54,7 @@ sudo apt update -y && sudo apt install -y \
   docker-ce \
   docker-ce-cli \
   containerd.io
+# // ------------------------------
 
 # - configure and start
 sudo systemctl start docker.service
@@ -118,6 +121,7 @@ sudo apt install -y \
 cp -rv .gitconfig ~/
 cp -rv starship.toml ~/.config/
 cp -rv fish/config.fish ~/.config/fish/
+cp -rv fish/zoxide-conf.fish ~/.config/fish/
 cp -rv lsd/config.yaml ~/.config/lsd/
 cp -rv pulse.conf ~/.config/pulse/daemon.conf
 cp -rv alacritty ~/.config/
@@ -164,4 +168,5 @@ sudo apt install -y ~/temp/vscode.deb
 # // ------------------------------
 
 rm -rf ~/temp
+
 exit 0
