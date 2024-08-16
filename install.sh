@@ -142,17 +142,18 @@ cp -rv SimpleScreenRecorder/.ssr ~/
 chsh -s $(which fish)
 
 # NPM PACKAGES
-sudo npm i -g \
-  begynner \
-  easy-rename \
-  gtop \
-  localtunnel \
-  n \
-  svgo \
-  vercel
+sudo apt install npm
+sudo npm i -g n npm
 
 # - set nodejs to LTS
 sudo n lts
+
+sudo npm i -g begynner \
+  easy-rename \
+  gtop \
+  localtunnel \
+  svgo \
+  vercel
 
 # - nerd fonts
 wget "https://github.com/ryanoasis/nerd-fonts/archive/refs/heads/master.zip" -O ~/temp/nerd-fonts.zip
