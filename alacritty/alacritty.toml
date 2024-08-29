@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/plugins/gruvbox-dark.toml"]
+import = ["~/.config/alacritty/plugins/bearded-hc-ebony.toml"]
 
 [shell]
 program = "/bin/bash"
@@ -14,9 +14,10 @@ padding = { x = 10, y = 10 }
 dynamic_padding = true
 
 [font]
-normal = { family = "BitstromWera Nerd Font" }
-bold = { family = "BitstromWera Nerd Font", style = "Bold" }
-size = 15.0
+normal = { family = "JetBrainsMono Nerd Font" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+size = 12.0
+offset.y = 2
 
 [selection]
 save_to_clipboard = true
