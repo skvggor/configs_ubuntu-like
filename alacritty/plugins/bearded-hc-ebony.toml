@@ -1,0 +1,29 @@
+# Colors (Adaptado do BeardedTheme Hc-ebony)
+[colors]
+
+  # Default colors
+  [colors.primary]
+    background = '#181820' # Adaptado do editor.background
+    foreground = '#c8c8d5' # Adaptado do editor.foreground
+
+  # Normal colors
+  [colors.normal]
+    black   = '#181820' 
+    red     = '#fd604f' 
+    green   = '#AFEA7B' 
+    yellow  = '#F5DF76' 
+    blue    = '#7fd7f5' 
+    magenta = '#e4a3df' 
+    cyan    = '#22D3B1' 
+    white   = '#ffffff' 
+
+  # Bright colors
+  [colors.bright]
+    black   = '#424257' # Adaptado do terminal.ansiBrightBlack
+    red     = '#ff5e4d' # Adaptado do terminal.ansiBrightRed
+    green   = '#aeff66' # Adaptado do terminal.ansiBrightGreen
+    yellow  = '#ffe66c' # Adaptado do terminal.ansiBrightYellow
+    blue    = '#75dcff' # Adaptado do terminal.ansiBrightBlue
+    magenta = '#f691ee' # Adaptado do terminal.ansiBrightMagenta
+    cyan    = '#00f5c6' # Adaptado do terminal.ansiBrightCyan
+    white   = '#ffffff'

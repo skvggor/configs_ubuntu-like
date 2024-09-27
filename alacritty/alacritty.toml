@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/plugins/bearded-hc-ebony.toml"]
+import = ["~/.config/alacritty/plugins/papercolor_dark.toml"]
 
 [shell]
 program = "/bin/bash"
@@ -16,7 +16,7 @@ dynamic_padding = true
 [font]
 normal = { family = "JetBrainsMono Nerd Font" }
 bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-size = 12.0
+size = 14.0
 offset.y = 2
 
 [selection]

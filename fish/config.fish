@@ -1,4 +1,7 @@
 set PATH $HOME/.cargo/bin $PATH
+set PATH $HOME/Flutter-SDK/flutter/bin $PATH
+set PATH $HOME/Android-Studio/android-studio/bin $PATH
+set PATH $HOME/Android/Sdk/cmdline-tools/latest/bin $PATH
 
 set fish_greeting ""
 
@@ -8,10 +11,6 @@ end
 
 function postman
     /bin/Postman/./Postman
-end
-
-function android-studio
-    /opt/android-studio/bin/./studio.sh
 end
 
 function sshadd
