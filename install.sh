@@ -127,7 +127,7 @@ sudo apt install -y \
   solaar
 
 # INSTALL CONFIGURATIONS
-cp -rv .gitconfig ~/
+cp -rv .gitconfig ~/.gitconfig
 cp -rv starship.toml ~/.config/
 cp -rv fish/config.fish ~/.config/fish/
 cp -rv fish/zoxide-conf.fish ~/.config/fish/
@@ -157,7 +157,7 @@ sudo npm i -g begynner \
 
 # - nerd fonts
 wget "https://github.com/ryanoasis/nerd-fonts/archive/refs/heads/master.zip" -O ~/temp/nerd-fonts.zip
-unzip ~/temp/nerd-fonts.zip
+unzip ~/temp/nerd-fonts.zip -d ~/temp
 cd ~/temp/nerd-fonts
 bash install.sh
 # // ------------------------------
