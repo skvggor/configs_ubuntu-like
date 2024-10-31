@@ -1,6 +1,5 @@
-import = ["~/.config/alacritty/plugins/papercolor_dark.toml"]
 
-[shell]
+[terminal.shell]
 program = "/bin/bash"
 args = [
   "-l",
@@ -32,3 +31,6 @@ osc52 = "CopyPaste"
 
 [scrolling]
 history = 50000
+
+[general]
+import = ["~/.config/alacritty/plugins/papercolor_dark.toml"]
