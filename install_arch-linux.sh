@@ -51,11 +51,11 @@ yay -S --noconfirm \
   nitch
 
 sudo pacman -S --needed docker
-# sudo systemctl start docker.service
-# sudo systemctl enable docker.service
-# sudo groupadd docker || true
-# sudo usermod -aG docker $USER
-# newgrp docker
+sudo systemctl start docker.service
+sudo systemctl enable docker.service
+sudo groupadd docker || true
+sudo usermod -aG docker $USER
+newgrp docker
 
 sudo pacman -S --needed starship
 
@@ -100,6 +100,8 @@ unzip -o obs-studio.zip -d ~/.config/obs-studio
 chsh -s $(which fish)
 
 sudo update-desktop-database
+
+curl -f https://zed.dev/install.sh | sh
 
 rm -rf ~/temp
 
