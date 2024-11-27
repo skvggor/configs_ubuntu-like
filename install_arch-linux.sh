@@ -12,26 +12,28 @@ sudo fc-cache -f -v
 
 sudo pacman -S --needed \
   cheese \
-  darktable \
-  gimp \
-  inkscape \
-  krita \
-  obs-studio \
-  vlc \
-  flameshot \
-  solaar
-
-sudo pacman -S --needed \
   cmake \
   cmatrix \
+  darktable \
   fish \
+  flameshot \
+  gimp \
   go \
+  inkscape \
   jq \
   konsole \
+  krita \
   micro \
   net-tools \
   nodejs \
-  npm
+  npm \
+  obs-studio \
+  solaar \
+  vlc
+
+if ! command -v unzip &>/dev/null; then
+  sudo pacman -S --needed unzip
+fi
 
 if ! command -v yay &>/dev/null; then
   cd /tmp
