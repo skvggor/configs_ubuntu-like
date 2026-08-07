@@ -25,3 +25,10 @@ history = 50000
 
 # [general]
 # import = ["~/.config/alacritty/plugins/alabaster_dark.toml"]
+
+# Send Shift+Return and Alt+Shift+Return as CSI-u so TUIs can distinguish them from Return.
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Shift", chars = "\u001b[13;2u" },
+  { key = "Return", mods = "Alt|Shift", chars = "\u001b[13;4u" },
+]
